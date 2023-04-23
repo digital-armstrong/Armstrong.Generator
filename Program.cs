@@ -20,14 +20,16 @@ class Program
       foreach (var channel in channels)
       {
         channel.EventSystemValue = random.NextDouble();
+        channel.EventSystemValue = random.NextDouble() * 5.5f;
         channel.EventDatetime = DateTime.UtcNow;
         channel.UpdatedAt = DateTime.UtcNow;
+        channel.EventCount++;
       }
 
       context.SaveChanges();
       Console.WriteLine($"Updated {channels.Count} channels");
 
-      Thread.Sleep(10000);
+      Thread.Sleep(2500);
     }
   }
 }
