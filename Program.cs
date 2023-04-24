@@ -4,6 +4,13 @@ using Armstrong.Generator.Data;
 namespace Armstrong.Generator;
 class Program
 {
+  struct States
+  {
+    public static string Normal => "normal";
+    public static string Warning => "warning";
+    public static string Danger => "danger";
+  }
+
   static void Main(string[] args)
   {
     Random random = new Random();
@@ -24,6 +31,12 @@ class Program
         channel.EventDatetime = DateTime.UtcNow;
         channel.UpdatedAt = DateTime.UtcNow;
         channel.EventCount++;
+
+        switch (channel.EventSystemValue > 0.3f)
+        {
+          case true: channel.ChannelState = States.Warning; break;
+          case false: channel.ChannelState = States.Normal; break;
+        }
       }
 
       context.SaveChanges();
