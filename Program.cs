@@ -17,8 +17,10 @@ class Program
 
     var context = new DataContext();
     var channels = new List<Channel>();
+    var history = new List<History>();
 
     channels = context.Channels.ToList<Channel>();
+    history = context.Histories.ToList<History>();
 
     Console.WriteLine($"Found {channels.Count} channels");
 
@@ -26,9 +28,10 @@ class Program
     {
       foreach (var channel in channels)
       {
+        channel.EventImpulseValue = random.NextDouble() / 2;
         channel.EventSystemValue = random.NextDouble();
         channel.EventSystemValue = random.NextDouble() * 5.5f;
-        channel.EventDatetime = DateTime.UtcNow;
+        channel.EventDateTime = DateTime.UtcNow;
         channel.UpdatedAt = DateTime.UtcNow;
         channel.EventCount++;
 
@@ -37,6 +40,17 @@ class Program
           case true: channel.ChannelState = States.Warning; break;
           case false: channel.ChannelState = States.Normal; break;
         }
+
+        context.Histories.Add(new History
+        {
+          ChannelId = (int)channel.Id,
+          EventImpulseValue = channel.EventImpulseValue,
+          EventSystemValue = channel.EventSystemValue,
+          EventNotSystemValue = channel.EventNotSystemValue,
+          EventDateTime = channel.EventDateTime,
+          UpdatedAt = channel.UpdatedAt,
+          CreatedAt = DateTime.UtcNow
+        });
       }
 
       context.SaveChanges();

@@ -10,10 +10,18 @@ namespace Armstrong.Generator.Models
     public long Id { get; set; }
     [Column("channel_id")]
     public int ChannelId { get; set; }
-    public Channel Channel { get; set; }
-    [Column("event_value")]
-    public double SystemEventValue { get; set; }
-    [Column("event_date")]
-    public DateTime EventDate { get; set; }
+    [Column("event_impulse_value")]
+    public double EventImpulseValue { get; set; }
+    [Column("event_system_value")]
+    public double EventSystemValue { get; set; }
+    [Column("event_not_system_value")]
+    public double EventNotSystemValue { get; set; }
+    [Column("event_datetime")]
+    public DateTime EventDateTime { get; set; }
+    [Column("created_at")]
+    public DateTime CreatedAt { get; set; }
+
+    [Column("updated_at")]
+    public DateTime UpdatedAt { get; set; }
   }
 }

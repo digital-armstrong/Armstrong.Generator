@@ -7,7 +7,7 @@ namespace Armstrong.Generator.Data
   public class DataContext : DbContext
   {
     public DbSet<Channel>? Channels { get; set; }
-    // public DbSet<History>? Histories { get; set; }
+    public DbSet<History>? Histories { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {

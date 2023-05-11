@@ -55,7 +55,7 @@ namespace Armstrong.Generator.Models
     public double EventImpulseValue { get; set; }
 
     [Column("event_datetime")]
-    public DateTime EventDatetime { get; set; }
+    public DateTime EventDateTime { get; set; }
 
     [Column("event_count")]
     public int EventCount { get; set; }
